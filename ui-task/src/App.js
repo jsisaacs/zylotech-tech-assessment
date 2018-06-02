@@ -40,6 +40,16 @@ class App extends Component {
           uid: 4,
           url: 'https://media1.popsugar-assets.com/files/thumbor/2zGpEunPsQjlrBlLab3dRvTRNgg/fit-in/1024x1024/filters:format_auto-!!-:strip_icc-!!-/2012/10/41/3/192/1922283/5d984387bf2ea82a_hulk/i/Hulk-From-Avengers-Age-Ultron.jpeg',
           name: 'Hulk'
+        },
+        {
+          uid: 5,
+          url: 'https://pre00.deviantart.net/704d/th/pre/i/2017/213/9/9/avengers_infinity_war_iron_spider_by_timetravel6000v2-dbijmh2.jpg',
+          name: 'Spider Man'
+        },
+        {
+          uid: 6, 
+          url: 'https://www.gannett-cdn.com/-mm-/d401e4f3c3adf3a7d48e99a4aebc9a609a3fdd5d/c=0-76-2988-4061&r=537&c=0-0-534-712/local/-/media/2018/01/27/USATODAY/USATODAY/636526458976202193-BlackPanther596d2f0946755.jpg',
+          name: 'Black Panther'
         }
       ]
     };  
@@ -76,6 +86,7 @@ class App extends Component {
   addImage(urlInput, nameInput) {
     const images = this.state.imageCollection;
     images.push({
+      uid: images.length + 1,
       url: urlInput,
       name: nameInput
     });
