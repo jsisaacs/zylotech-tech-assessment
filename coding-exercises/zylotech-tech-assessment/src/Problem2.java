@@ -16,10 +16,11 @@ public class Problem2 {
    */
 
   /**
-   *
-   * @param str
-   * @param n
-   * @return
+   * If the number is even, make the string uppercase, if the number is
+   * odd, make the string lowercase.
+   * @param str is the string to be transformed
+   * @param n is the input number
+   * @return a transformed string
    */
   public static String XyloHack(String str, int n) {
     //even
