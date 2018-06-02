@@ -62,11 +62,15 @@ class App extends Component {
   }
 
   handleUrlInputChange(event) {
-    this.setState({urlInput: event.target.value})
+    this.setState({
+      urlInput: event.target.value
+    });
   }
 
   handleNameInputChange(event) {
-
+    this.setState({
+      nameInput: event.target.value
+    })
   }
 
   addImage(urlInput, nameInput) {
@@ -114,7 +118,7 @@ class App extends Component {
                 name="search" 
                 id="searchBar" 
                 value={this.state.search}
-                    onChange={this.updateSearch.bind(this)}
+                onChange={this.updateSearch.bind(this)}
                 placeholder="Type to filter!" 
               />
             </FormGroup>
@@ -133,7 +137,8 @@ class App extends Component {
                 type="text" 
                 name="url" 
                 id="urlBar" 
-                // value={this.state.urlInput}
+                value={this.state.urlInput}
+                onChange={this.handleUrlInputChange.bind(this)}
                 className="mr-sm-2"
                 placeholder="Enter an image URL!" 
               />
@@ -164,6 +169,8 @@ class App extends Component {
                   type="text" 
                   name="name" 
                   id="nameBar" 
+                  value={this.state.nameInput}
+                  onChange={this.handleNameInputChange.bind(this)}
                   placeholder="Enter an image name!" 
                 />
               </FormGroup>
