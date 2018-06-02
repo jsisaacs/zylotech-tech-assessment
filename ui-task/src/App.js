@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Image from './Image';
-import Form from './Form';
 import { 
   Container,
   CardColumns,
   Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter
+  Input,
+  Label,
+  FormGroup,
+  Form,
+  Col
  } from 'reactstrap';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      search: '',
+      urlInput: '',
+      nameInput: '',
       imageCollection: [
         {
           uid: 1,
@@ -48,11 +51,23 @@ class App extends Component {
     });
   }
   
-
   componentWillUpdate = (nextProps, nextState) => {
     localStorage.setItem('images', JSON.stringify(nextState.imageCollection));
   }
-  
+
+  updateSearch(event) {
+    this.setState({
+      search: event.target.value.substr(0, 20)
+    });
+  }
+
+  handleUrlInputChange(event) {
+    this.setState({urlInput: event.target.value})
+  }
+
+  handleNameInputChange(event) {
+
+  }
 
   addImage(urlInput, nameInput) {
     const images = this.state.imageCollection;
@@ -73,34 +88,106 @@ class App extends Component {
   }
   
   render() {
+    let filteredImages = this.state.imageCollection.filter(
+      (image) => {
+        return image.name.indexOf(this.state.search) !== -1;
+      }
+    );
     return (
       <div className="App">
-        <Container>
-          {/* <Row> */}
-          <CardColumns>
-              {this.state.imageCollection.map(image => (
-                // <Col sm="4">
-                  <Image 
-                    url={image.url} 
-                    name={image.name} 
-                    removeImage={
-                      () => {
-                        this.removeImage(image.uid)
-                      }
-                    }
-                  />
-                // </Col>
-              ))}
-          </CardColumns>
-          {/* </Row> */}
-        </Container>
-        <Button color="success" onClick={
-          () => {
+        <div id="header">
+          <h1>Image Host</h1>
+        </div>
+        <div id="outerForm">
+        <div id="innerForm">
+        <div id="searchBar">
+          <Form inline>
+            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+              <Label 
+                for="searchBar"
+                className="mr-sm-3"
+              >
+                Search
+              </Label>
+              <Input 
+                type="text" 
+                name="search" 
+                id="searchBar" 
+                value={this.state.search}
+                    onChange={this.updateSearch.bind(this)}
+                placeholder="Type to filter!" 
+              />
+            </FormGroup>
+          </Form>
+        </div>
+        <div id="urlBar">
+          <Form inline>
+            <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+              <Label 
+                for="urlBar"
+                className="mr-sm-5"
+              >
+                Url
+              </Label>
+              <Input 
+                type="text" 
+                name="url" 
+                id="urlBar" 
+                // value={this.state.urlInput}
+                className="mr-sm-2"
+                placeholder="Enter an image URL!" 
+              />
+              <Button
+              color="primary"
+              onClick={
+                () => {
+                  this.addImage(this.state.urlInput, this.state.nameInput);
+                }
+              }
+            >
+              Add New Image
+            </Button>
+            </FormGroup>
             
-          }     
-        }>
-        Add new Image
-        </Button>
+          </Form>
+        </div>
+        <div id="nameBar">
+          <Form inline>
+              <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                <Label 
+                  for="nameBar"
+                  className="mr-sm-4"
+                >
+                  Name
+                </Label>
+                <Input 
+                  type="text" 
+                  name="name" 
+                  id="nameBar" 
+                  placeholder="Enter an image name!" 
+                />
+              </FormGroup>
+            </Form>
+        </div>
+        </div>
+        </div>
+        <div id="cardView">
+          <Container>
+            <CardColumns>
+                {filteredImages.map(image => (
+                    <Image 
+                      url={image.url} 
+                      name={image.name} 
+                      removeImage={
+                        () => {
+                          this.removeImage(image.uid)
+                        }
+                      }
+                    />
+                ))}
+            </CardColumns>
+          </Container>
+        </div>
       </div>
     );
   }

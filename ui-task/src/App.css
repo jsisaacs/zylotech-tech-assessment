@@ -1,28 +1,36 @@
 .App {
   text-align: center;
+  padding-top: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+#header {
+  padding-bottom: 50px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+#outerForm {
+  width: 100%;
+  text-align: center;
 }
 
-.App-title {
-  font-size: 1.5em;
+#innerForm {
+  display: inline-block;
 }
 
-.App-intro {
-  font-size: large;
+#searchBar {
+  margin-bottom: 11px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#urlBar {
+  margin-left: -0.5px;
+}
+
+#nameBar {
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
+#cardView {
+  padding-top: 40px;
 }
